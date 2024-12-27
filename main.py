@@ -1,9 +1,9 @@
 # TODO:
 #   - Support Release Date
-#   - Support cover art
 
 
 import requests
+import cloudscraper
 from bs4 import BeautifulSoup
 import json
 import os
@@ -17,7 +17,8 @@ saveCoverInId3 = False
 def main():
     albumURL = input("Enter Bandcamp album URL: ")
 
-    response = requests.get(albumURL)
+    scraper = cloudscraper.create_scraper()
+    response = scraper.get(albumURL)
     soup = BeautifulSoup(response.content, "html.parser")
 
     # parse album info from html
